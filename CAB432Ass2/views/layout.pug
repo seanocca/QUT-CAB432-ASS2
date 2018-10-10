@@ -1,7 +1,41 @@
 doctype html
 html
   head
-    title= title
-    link(rel='stylesheet', href='/stylesheets/style.css')
-  body
-    block content
+    title Twitter Search
+    link(rel='stylesheet', href='/stylesheets/materialize.css')
+    link(rel='stylesheet', href='https://fonts.googleapis.com/icon?family=Material+Icons')
+  nav
+    .nav-wrapper
+      a.brand-logo(href='') Logo
+        ul#nav-mobile.right.hide-on-med-and-down
+          li
+            a(href='') Video
+          li
+            a(href='') Information
+  .row
+    .col.s12.m4.l3
+      form(action='search_terms')
+        .input-field
+          i.material-icons.prefix search
+          textarea(name='search_value')#icon_prefix2.materialize-textarea
+          label(for='icon_prefix2') Search
+        p
+          label
+            input.filled-in(type='checkbox', name='one')
+            span Number One
+        p
+          label
+            input.filled-in(type='checkbox', name='two')
+            span Number Two
+        p
+          label
+            input.filled-in(type='checkbox', name='three')
+            span Number Three
+        p
+          button.btn.waves-effect.waves-light(type='submit', name='submit')
+            | Submit
+            i.material-icons.right search
+
+    .col.s12.m8.l9
+      .container
+        block content

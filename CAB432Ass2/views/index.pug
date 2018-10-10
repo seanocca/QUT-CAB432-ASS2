@@ -1,5 +1,8 @@
 extends layout
 
 block content
-  h1= title
-  p Welcome to #{title}
+  h1 #{title}
+  h8 Welcome to #{title}
+  br
+  video.responsive-video(controls='')
+  source(src='movie.mp4', type='video/mp4')
