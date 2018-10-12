@@ -3,7 +3,6 @@
  * Copyright 2014-2017 Materialize
  * MIT License (https://raw.githubusercontent.com/Dogfalo/materialize/master/LICENSE)
  */
-
 p {
   padding-left: 20%;
 }
@@ -3483,7 +3482,6 @@ table span.badge {
 }
 
 .row {
-  margin-left: 2.5%;
   margin-right: auto;
   margin-bottom: auto;
 }

@@ -1,8 +1,31 @@
 extends layout
 
 block content
-  h1 #{title}
-  h8 Welcome to #{title}
-  br
-  video.responsive-video(controls='')
-  source(src='movie.mp4', type='video/mp4')
+  .row
+    .col.s12.m4.l3
+      form(action='search_terms')
+        .row
+          .input-field
+            i.material-icons.prefix search
+            textarea(name='search_value')#icon_prefix2.materialize-textarea
+            label(for='icon_prefix2') Search
+        p
+          each tag in trends
+            a
+              label
+                input.filled-in(type='checkbox')
+                span #{tag.name}
+            br
+    .col.s12.m8.l9
+      .container
+        each tweet in tweets
+          .col.s12.m6
+            .card
+             .card-content
+               p #{tweet.text}
+             .card-tabs
+               ul.tabs.tabs-fixed-width
+                 li.tab
+                   a(href='#'+ tweet.id) Tweet Text
+                 li.tab
+                   a.active(href='#a'+ tweet.id) Sentiment Analysis

@@ -1,12 +1,14 @@
-var express = require('express');
-var router = express.Router();
-let twitter = require('./twitter.js')
+let express = require('express');
+let router = express.Router();
+let twitter = require('./twitter.js');
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
-	let hello = twitter.get();
-	console.log(hello);
-  	res.render('index', { title: hello });
+	twitter.aus_search(function(trends){
+		twitter.search(trends, 5, function(tweets){
+			res.render('index', { trends: trends, tweets: tweets});
+		});
+	});
 });
 
 module.exports = router;
