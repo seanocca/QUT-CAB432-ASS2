@@ -13,19 +13,16 @@ block content
           each tag in trends
             a
               label
-                input.filled-in(type='checkbox')
+                input.filled-in(type='checkbox', name=tag.name)
                 span #{tag.name}
             br
     .col.s12.m8.l9
       .container
+        h2 Dropping a Bomb of Tweets
         each tweet in tweets
-          .col.s12.m6
-            .card
-             .card-content
-               p #{tweet.text}
-             .card-tabs
-               ul.tabs.tabs-fixed-width
-                 li.tab
-                   a(href='#'+ tweet.id) Tweet Text
-                 li.tab
-                   a.active(href='#a'+ tweet.id) Sentiment Analysis
+          .col.s12.m5
+            .card-panel.teal
+              span.white-text
+                | #{tweet.text}
+                br
+                | #{tweet.sentiment_value}

@@ -20,7 +20,7 @@ module.exports = {
 		});
 	},
 
-	search: async function(search_term, term_id, callback){
+	search: function(search_term, term_id, callback){
 		client.get('search/tweets', { langauge: 'en', q: search_term[term_id].name }, function(error, tweets, res){
 			if (!error) {
 				let searched_tweets = [];
@@ -29,7 +29,8 @@ module.exports = {
 					if (curr_tweet != null ){
 						let sentiment = natural.get_sentiment(curr_tweet.text);
 						searched_tweets.push(curr_tweet);
-						searched_tweets[tweet].sentiment = sentiment;
+						searched_tweets[tweet].sentiment_value = sentiment.score;
+						searched_tweets[tweet].tag = search_term;
 					}
 				}
 		  		callback(searched_tweets);
