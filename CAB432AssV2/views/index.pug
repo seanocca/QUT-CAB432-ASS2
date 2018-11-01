@@ -1,0 +1,32 @@
+extends layout
+
+block content
+  .row
+    .col.s12.m3
+      form(action='/search', name="search")
+        .row
+           button.btn.waves-effect.waves-light(type='submit')
+            | Search
+            i.material-icons.right send
+        p
+          ul.collection
+            each tag in trends
+                li.collection-item
+                  label
+                    input.filled-in(type='checkbox', name='value', value=tag.tag)
+                    span #{tag.tag}
+                  if tag.amount_of_tweets
+                    span.new.badge #{tag.amount_of_tweets}
+  if search_tags != undefined
+    each search_term in searched_tags
+      .col.s12.m6
+        ul.collection.with-header
+          li.collection-header
+            h4 Tweets for #{search_term}
+        each tweet in search_term
+          li.collection-item #{tweet.text}
+      .col.s12.m3
+        ul.collection.with-header
+          li.collection-header
+            h4 Average Sentiment for #{search_term}
+          li.collection-item 55%

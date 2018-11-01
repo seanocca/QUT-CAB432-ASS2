@@ -3,9 +3,6 @@
  * Copyright 2014-2017 Materialize
  * MIT License (https://raw.githubusercontent.com/Dogfalo/materialize/master/LICENSE)
  */
-p {
-  padding-left: 20%;
-}
 
 nav .nav-wrapper ul li a {
   padding: 4.5px 10px;
@@ -3399,7 +3396,7 @@ span.badge.new {
 }
 
 span.badge.new:after {
-  content: " new";
+  content: " posts";
 }
 
 span.badge[data-badge-caption]::after {

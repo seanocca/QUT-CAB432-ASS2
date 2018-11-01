@@ -10,17 +10,20 @@ block content
             textarea(name='search_value')#icon_prefix2.materialize-textarea
             label(for='icon_prefix2') Search
         p
-          each tag in trends
-            a
-              label
-                input.filled-in(type='checkbox', name=tag.name)
-                span #{tag.name}
-            br
+          ul.collection
+            each tag in trends
+                li.collection-item
+                  label
+                    input.filled-in(type='checkbox', name=tag.name)
+                    span
+                    | #{tag.name}
+                  if tag.tweet_volume
+                    span.new.badge #{tag.tweet_volume}
     .col.s12.m8.l9
       .container
         h2 Dropping a Bomb of Tweets
         each tweet in tweets
-          .col.s12.m5
+          .col.s12.m4
             .card-panel.teal
               span.white-text
                 | #{tweet.text}

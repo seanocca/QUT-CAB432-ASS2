@@ -14,7 +14,6 @@ module.exports = {
 		client.get('statuses/home_timeline', function(error, tweets, res) {
 		  	if (!error) {
 		  		let ans = tweets;
-		  		console.log(ans.text);
 		  		return tweets;
 		  }
 		});
@@ -38,7 +37,7 @@ module.exports = {
 		});
 	},
 
-	aus_search: function(callback){
+	aus_tags: function(callback){
 		client.get('trends/place', { id: '23424748' }, function(error, tweets, res){
 			if (!error){
 				let trends = [];
@@ -52,8 +51,8 @@ module.exports = {
 		});
 	},
 
-	stream: function(){
-		client.stream('statuses/filter', {track: 'JSON',  language: 'en'}, function(stream) {
+	stream: function(term){
+		client.stream('statuses/filter', {track: term,  language: 'en'}, function(stream) {
 		  stream.on('data', function(event) {
 		    console.log(event && event.text);
 		    return event.text
