@@ -17,16 +17,15 @@ block content
                     span #{tag.tag}
                   if tag.amount_of_tweets
                     span.new.badge #{tag.amount_of_tweets}
-  if search_tags != undefined
-    each search_term in searched_tags
-      .col.s12.m6
-        ul.collection.with-header
-          li.collection-header
-            h4 Tweets for #{search_term}
-        each tweet in search_term
-          li.collection-item #{tweet.text}
-      .col.s12.m3
-        ul.collection.with-header
-          li.collection-header
-            h4 Average Sentiment for #{search_term}
-          li.collection-item 55%
+  if all_tweets
+    .col.s12.m6
+      ul.collection.with-header
+        li.collection-header
+          h4 All Tweets
+      each tweet in all_tweets
+        li.collection-item #{tweet.tweet_text}
+    .col.s12.m3
+      ul.collection.with-header
+        li.collection-header
+          h4 Average Sentiment
+        li.collection-item 55%

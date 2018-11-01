@@ -33,39 +33,42 @@ module.exports = {
 
 	stream: function(tag){
 		let trends = tag.split(',');
-		client.stream('statuses/filter', {track: trend,  language: 'en'}, function(stream) {
-			console.log("Stream Started");
-		  	stream.on('data', function(tweet) {
-				let tweet_text = "";
-				if(tweet != undefined) {
-					if (tweet.lang === 'en'){
-					    if(tweet.extended_tweet){
-					      	tweet_text = tweet.extended_tweet.full_text;
-					    }else{
-					      	if(tweet.retweeted_status) {
-					        	tweet_text = tweet.retweeted_status.text;
-					      	} else {
-					        	tweet_text = tweet.text;
-					      	}
-					    }
+		for (let trend in trends){
+			console.log(trends[trend]);
+			client.stream('statuses/filter', {track: trends[trend],  language: 'en'}, function(stream) {
+				console.log("Stream Started");
+			  	stream.on('data', function(tweet) {
+					let tweet_text = "";
+					if(tweet != undefined) {
+						if (tweet.lang === 'en'){
+						    if(tweet.extended_tweet){
+						      	tweet_text = tweet.extended_tweet.full_text;
+						    }else{
+						      	if(tweet.retweeted_status) {
+						        	tweet_text = tweet.retweeted_status.text;
+						      	} else {
+						        	tweet_text = tweet.text;
+						      	}
+						    }
+						}
 					}
-				}
-				if (tweet_text != ""){
-					let sentiment_amount = natural.get_sentiment(tweet_text);
+					if (tweet_text != ""){
+						let sentiment_amount = natural.get_sentiment(tweet_text);
 
-					let enter_tweet = new Tweet({
-						tag: tag,
-						text: tweet_text,
-						sentiment_value: sentiment_amount.score
-					});
+						let enter_tweet = new Tweet({
+							tag: trends[trend],
+							text: tweet_text,
+							sentiment_value: sentiment_amount.score
+						});
 
-					enter_tweet.save();
-				}
+						enter_tweet.save();
+					}
+				});
+
+				stream.on('error', function(error) {
+					stream.destroy();
+				});
 			});
-
-			stream.on('error', function(error) {
-				console.log(error);
-			});
-		});
+		}
 	}
 }

@@ -35,28 +35,25 @@ let Tag = mongoose.model('Tag', tag_schema);
 
 mongoose.connect(mongoURL, function(error) {
 
-	Tag.collection.drop();
-	Tweet.collection.drop();
-
 	//Get Current Tags
-	client.get('trends/place', { id: '23424748' }, function(error, tweets, res, callback){
-		if (!error){
-			for (trend_group in tweets){
-				for (trend in tweets[trend_group].trends){
-					console.log(tweets[trend_group].trends[trend]);
-					let new_tag = new Tag({
-						tag: tweets[trend_group].trends[trend].name,
-					});
+	// client.get('trends/place', { id: '23424748' }, function(error, tweets, res, callback){
+	// 	if (!error){
+	// 		for (trend_group in tweets){
+	// 			for (trend in tweets[trend_group].trends){
+	// 				console.log(tweets[trend_group].trends[trend]);
+	// 				let new_tag = new Tag({
+	// 					tag: tweets[trend_group].trends[trend].name,
+	// 				});
 
-					new_tag.save();
-					console.log("Tag Saved!");
-					if (trend == trend){
+	// 				new_tag.save();
+	// 				console.log("Tag Saved!");
+	// 				if (trend == trend){
 
-					}
-				}
-			}
-		}
-	});
+	// 				}
+	// 			}
+	// 		}
+	// 	}
+	// });
 
 	// You can also get the stream in a callback if you prefer.
 	client.stream('statuses/filter', {track: default_track }, function(stream) {
@@ -90,7 +87,7 @@ mongoose.connect(mongoURL, function(error) {
 		});
 
 		stream.on('error', function(error) {
-			throw error;
+			console.log(error);
 		});
 	});
 });

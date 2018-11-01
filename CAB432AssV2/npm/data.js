@@ -14,7 +14,7 @@ module.exports = {
 		});
 	},
 
-	stream: function(tag, callback){
+	start_stream: function(tag, callback){
 		request.get({
 			"headers": {"content-type": "application/json"},
 			"url":'http://localhost:3001/stream/'+ tag},
@@ -22,5 +22,14 @@ module.exports = {
 				if (error) { console.log("Cannot start Stream!")}
 				else { console.log("Stream Started"); }
 			});
+	},
+
+	find_tweet: function(tag, callback){
+		Tweet.find({
+			"tag": tag,
+		}).stream().on('data', function(tweet){
+			console.log(tweet);
+			callback(tweet);
+		})
 	}
 }

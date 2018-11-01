@@ -1,6 +1,6 @@
-var express = require('express');
-var router = express.Router();
-let assert = require('assert');
+const express = require('express');
+const router = express.Router();
+const assert = require('assert');
 const mongoose = require('mongoose');
 const Twitter = require('../npm/twitter');
 const Tweet = require('../models/tweet');
@@ -31,7 +31,6 @@ router.get('/alltags', function(req, res, next){
 			} else {
 				let response = data;
 				res.send(response);
-				console.log("Got " + data.length + " Tags");
 			}
 		}
 	});
