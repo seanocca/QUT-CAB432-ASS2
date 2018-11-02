@@ -17,7 +17,7 @@ router.get('/', async function(req, res, next) {
 	});
 });
 
-router.get('/search', function(req, res, next){
+router.get('/', function(req, res, next){
 	let search_terms = req.query;
 	let all_tweets = [];
 

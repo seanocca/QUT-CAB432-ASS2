@@ -35,4 +35,10 @@ router.get('/alltags', function(req, res, next){
 	});
 });
 
+router.get('/get_tweets/:tags', function(req, res, next){
+	console.log(req.params.tags);
+	return(req.params.tags);
+
+})
+
 module.exports = router;

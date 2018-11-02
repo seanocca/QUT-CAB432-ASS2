@@ -1,32 +1,36 @@
 $(document).ready(function(){
 
   $("#submit").click(function () {
-  $.ajax({
+    $.ajax({
       type: 'POST',
       url: '/search',
       data: JSON.stringify({tags:tags}),
-      success: function(data) { window.location.href=data.url;},
+      success: function(data) { 
+        $.ajax({
+          type: 'GET',
+          url: 'http://localhost:3001/get_tweets/'+data,
+          success: function(tweet){
+            console.log(tweet);
+            drawChart();
+          }});
+        },
       contentType: "application/json",
       dataType: 'json'
       });
-  draw();
-  });
+    });
 });
 
 var btn = document.getElementById('submit');
 
-function draw(){
+function drawChart(){
   google.charts.load('current', {'packages':['line']});
   google.charts.setOnLoadCallback(drawChart);
-}
-
-function drawChart() {
 
   var data = new google.visualization.DataTable();
   data.addColumn('number', 'Sentiment');
   data.addColumn('number', 'Average Sentiment');
 
-  data.addRows([
+  data.addRow([
     [1,  37.8],
     [2,  30.9],
     [3,  25.4],

@@ -3,7 +3,7 @@ extends layout
 block content
   .row
     .col.s12.m3
-      form(action='/search', name="search")
+      form(action='/search', name="search", method="POST")
         .row
            button.btn.waves-effect.waves-light(type='submit', id='submit')
             | Search
