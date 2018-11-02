@@ -32,6 +32,7 @@ module.exports = {
 	},
 
 	stream: function(tag){
+		console.log(tag.size);
 		let trends = tag.split(',');
 		for (let trend in trends){
 			console.log(trends[trend]);

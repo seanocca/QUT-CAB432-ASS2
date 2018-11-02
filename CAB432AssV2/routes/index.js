@@ -18,32 +18,14 @@ router.get('/', async function(req, res, next) {
 });
 
 router.get('/search', function(req, res, next){
-	let search_terms = req.query.value;
+	let search_terms = req.query;
+	let all_tweets = [];
 
-	console.log(search_terms);
-
-	if (search_terms.size > 1){
-		for (let term in search_terms){
-			data.start_stream(search_terms[term]);
-			Tweet.find({
-				"tag": search_terms[term],
-			}).stream().on('data', function(tweet){
-				console.log(tweet);
-				data.get_tags(function(trends){
-					res.setHeader({all_tweets: tweet, trends : trends});
-				});
-			});
-		}
-	} else {
-		data.start_stream(search_terms);
-		Tweet.find({
-			"tag": search_terms,
-		}).stream().on('data', function(tweet){
-			console.log(tweet);
-			data.get_tags(function(trends){
-				res.setHeader({all_tweets: tweet, trends : trends});
-			});
-		});
+	for (let term in search_terms){
+		data.start_stream(search_terms[term]);
+		Tweet.find({"tag": search_terms[term],})
+		.cursor({transform: JSON.stringify})
+    	.pipe(res.type('json'));
 	}
 });
 

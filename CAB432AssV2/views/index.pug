@@ -5,7 +5,7 @@ block content
     .col.s12.m3
       form(action='/search', name="search")
         .row
-           button.btn.waves-effect.waves-light(type='submit')
+           button.btn.waves-effect.waves-light(type='submit', id='submit')
             | Search
             i.material-icons.right send
         p
@@ -17,15 +17,6 @@ block content
                     span #{tag.tag}
                   if tag.amount_of_tweets
                     span.new.badge #{tag.amount_of_tweets}
-  if all_tweets
     .col.s12.m6
-      ul.collection.with-header
-        li.collection-header
-          h4 All Tweets
-      each tweet in all_tweets
-        li.collection-item #{tweet.tweet_text}
-    .col.s12.m3
-      ul.collection.with-header
-        li.collection-header
-          h4 Average Sentiment
-        li.collection-item 55%
+      #chart_error
+      #chart

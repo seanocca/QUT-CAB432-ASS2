@@ -17,7 +17,6 @@ Twitter.aus_tags(function(trends){ console.log("Got All Tags"); });
 
 
 router.get('/stream/:tag', function(req, res, next){
-	console.log(req.params.tag);
 	Twitter.stream(req.params.tag);
 });
 

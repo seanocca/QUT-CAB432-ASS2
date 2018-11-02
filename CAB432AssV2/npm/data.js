@@ -1,4 +1,6 @@
 const request = require('request');
+const Tweet = require('../models/tweet');
+const Tag = require('../models/tag');
 
 module.exports = {
 
@@ -19,7 +21,7 @@ module.exports = {
 			"headers": {"content-type": "application/json"},
 			"url":'http://localhost:3001/stream/'+ tag},
 			function(error, res, body){
-				if (error) { console.log("Cannot start Stream!")}
+				if (error) { console.log("Cannot start Stream!"); }
 				else { console.log("Stream Started"); }
 			});
 	},
