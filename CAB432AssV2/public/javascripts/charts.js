@@ -6,6 +6,7 @@ $(document).ready(function(){
       url: '/search',
       data: JSON.stringify({tags:tags}),
       success: function(data) { 
+        console.log(data);
         $.ajax({
           type: 'GET',
           url: 'http://localhost:3001/get_tweets/'+data,
