@@ -35,10 +35,20 @@ router.get('/alltags', function(req, res, next){
 	});
 });
 
-router.get('/get_tweets/:tags', function(req, res, next){
-	console.log(req.params.tags);
-	return(req.params.tags);
+router.get('/tweets/:tags', function(req, res, body){
+	let tags = JSON.stringify(req.body.value);
 
+	tags = tags.replace(/#/g,"");
+
+	tags = JSON.parse(tags);
+
+	for (let tag in tags){
+		Tweet.find({
+			"tag": tag,
+		}).stream().on('data', function(tweet){
+			res.json(tweet);
+		})
+	}
 })
 
 module.exports = router;

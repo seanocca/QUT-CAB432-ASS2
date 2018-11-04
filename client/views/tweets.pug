@@ -1,0 +1,11 @@
+extends layout
+
+block content
+    each tweet in tweets
+        .row
+          .col.s12.m5
+            .card-panel.teal
+              span.white-text
+                | #{tweet.text}
+                | #{tweet.sentiment_value}
+

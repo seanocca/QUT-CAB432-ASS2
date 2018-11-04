@@ -18,10 +18,20 @@ router.get('/', async function(req, res, next) {
 });
 
 router.post('/', function(req, res, next){
-	let search_terms = req.body.value;
+	let search_terms = JSON.stringify(req.body.value);
+
+	search_terms = search_terms.replace(/#/g,"");
+
+	search_terms = JSON.parse(search_terms);
+
+	let tweets = []
 
 	for (let term in search_terms){
 		data.start_stream(search_terms[term]);
+		data.find_tweet(search_terms[term], function(tweet){
+			tweets.push(tweet);
+			res.render('errors', {tweets: tweets});
+		});
 	}
 });
 
